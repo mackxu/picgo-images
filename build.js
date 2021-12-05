@@ -8,7 +8,7 @@ const readdirSortTime = (dir = './img') => {
     fs.readdirSync(imgDir)
     .map(name => ({
       name,
-      time: fs.statSync(`${dir}/${name}`).mtime.getTime()
+      time: fs.statSync(`${dir}/${name}`).birthtime.getTime()
     }))
     .sort((a, b) => b.time - a.time)
     .map(item => item.name)
@@ -16,11 +16,12 @@ const readdirSortTime = (dir = './img') => {
 };
 
 const tpl = `
+  
   ## 图片日常搜集
 
   {{#files}}
   > {{.}}
-  
+
   ![{{.}}](./img/{{.}})
   {{/files}}
 `;
