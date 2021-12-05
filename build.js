@@ -17,8 +17,10 @@ const readdirSortTime = (dir = './img') => {
 
 const tpl = `
   ## 图片日常搜集
+
   {{#files}}
-  * {{.}}
+  > {{.}}
+  
   ![{{.}}](./img/{{.}})
   {{/files}}
 `;
