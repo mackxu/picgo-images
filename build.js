@@ -18,16 +18,19 @@ const readdirSortTime = (dir = './img') => {
 const tpl = `
   ## 图片日常搜集
   {{#files}}
-  * ![{{.}}](./img/{{.}})
+  * {{.}}
+  ![{{.}}](./img/{{.}})
   {{/files}}
 `;
 
-function createReadme() {
+function main() {
   const files = readdirSortTime();
   const output = Mustache.render(tpl, { files });
   fs.writeFile('README.md', output, err => {
-    console.log(err);
+    if (err) {
+      console.log(err);
+    }
   })
 }
 
-console.log(createReadme());
+main()
