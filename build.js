@@ -6,22 +6,18 @@ const imgDir = './img';
 const readdirSortTime = (dir = './img') => {
   return (
     fs.readdirSync(imgDir)
-    .map(name => ({
-      name,
-      time: fs.statSync(`${dir}/${name}`).birthtime.getTime()
-    }))
-    .sort((a, b) => b.time - a.time)
+    .map(name => {
+      const filename = name.substring(0, name.lastIndexOf('.'));
+      return { name, filename }
+    })
+    .sort((a, b) => b.filename - a.filename)
     .map(item => item.name)
   )
 };
 
 const tpl = `
-  
-  ## 图片日常搜集
-
   {{#files}}
   > {{.}}
-
   ![{{.}}](./img/{{.}})
   {{/files}}
 `;
